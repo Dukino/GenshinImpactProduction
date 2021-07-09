@@ -132,7 +132,7 @@ class CharacterService {
     }
     getCharacters() {
         this.http
-            .get('http://tylerportfolio.com:3000/api/characters')
+            .get('http://localhost:3000/api/characters')
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])((characterData) => {
             return characterData.characters.map(character => {
                 return {
@@ -149,10 +149,10 @@ class CharacterService {
         });
     }
     getCharacter(_id) {
-        return this.http.get("http://tylerportfolio.com:3000/api/characters/" + _id);
+        return this.http.get("http://localhost:3000/api/characters/" + _id);
     }
     deleteCharacter(characterId) {
-        this.http.delete("http://tylerportfolio.com:3000/api/characters/" + characterId)
+        this.http.delete("http://localhost:3000/api/characters/" + characterId)
             .subscribe(() => {
             this.characters = this.characters.filter(character => character._id !== characterId);
             this.characterListChangedEvent.next([...this.characters.sort((a, b) => a.name > b.name ? 1 : b.name > a.name ? -1 : 0).slice()]);
@@ -163,7 +163,7 @@ class CharacterService {
             return;
         }
         return this.http
-            .post("http://tylerportfolio.com:3000/api/characters", newCharacter)
+            .post("http://localhost:3000/api/characters", newCharacter)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["tap"])((responseData) => {
             this.characters.push(responseData.createdCharacter);
             this.characterListChangedEvent.next([...this.characters.sort((a, b) => a.name > b.name ? 1 : b.name > a.name ? -1 : 0)]);
@@ -180,7 +180,7 @@ class CharacterService {
     }
     updateCharacter(character) {
         this.http
-            .put("http://tylerportfolio.com:3000/api/characters/" + character._id, character)
+            .put("http://localhost:3000/api/characters/" + character._id, character)
             .subscribe(response => {
             const updatedCharacters = [...this.characters];
             const oldCharacterIndex = updatedCharacters.findIndex(c => c._id === character._id);
@@ -280,7 +280,7 @@ class LevelingService {
     }
     getLevelingTable() {
         this.http
-            .get('http://tylerportfolio.com:3000/api/leveling')
+            .get('http://localhost:3000/api/leveling')
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_0__["map"])((levelingData) => {
             return levelingData.leveling.map(level => {
                 return {
@@ -1444,14 +1444,14 @@ class AscensionService {
     }
     deleteAscensionByCharId(char_id) {
         console.log("Deleting ascensions!");
-        this.http.delete("http://tylerportfolio.com:3000/api/ascensions/character/" + char_id).subscribe(() => {
+        this.http.delete("http://localhost:3000/api/ascensions/character/" + char_id).subscribe(() => {
         });
     }
     getAscension(_id) {
-        this.http.get("http://tylerportfolio.com:3000/api/ascensions");
+        this.http.get("http://localhost:3000/api/ascensions");
     }
     getAscensionByCharId(char_id) {
-        return this.http.get("http://tylerportfolio.com:3000/api/ascensions/character/" + char_id);
+        return this.http.get("http://localhost:3000/api/ascensions/character/" + char_id);
     }
     addAscension(newAscension) {
         if (!newAscension) {
@@ -1459,14 +1459,14 @@ class AscensionService {
         }
         console.log(newAscension);
         this.http
-            .post('http://tylerportfolio.com:3000/api/ascensions', newAscension)
+            .post('http://localhost:3000/api/ascensions', newAscension)
             .subscribe((responseData) => {
             this.ascensions.push(responseData.createdAscension);
         });
     }
     updateAscension(ascension) {
         this.http
-            .put("http://tylerportfolio.com:3000/api/ascensions" + ascension._id, ascension)
+            .put("http://localhost:3000/api/ascensions" + ascension._id, ascension)
             .subscribe(response => {
             const updatedAscensions = [...this.ascensions];
             const oldAscensionIndex = updatedAscensions.findIndex(a => a._id === ascension._id);
